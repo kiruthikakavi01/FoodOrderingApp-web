@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin Page</title>
+<link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-light ">
+        <!-- Navbar content -->
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" style="color: brown" href="index.html">Food Ordering App</a>
+            </li>
+          <li class="nav-item">
+            <a  class="nav-link active" aria-current="page" href="listMenu.html">List Menu</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="listUser.html">List User</a>
+          </li>
+         
+         
+        </ul>
+      </nav>
+      <h2>All Dishes</h2>
+      <table class="table" style="width:750px" >
+  <thead>
+    <tr>
+      <th scope="col" >S.No</th>
+      <th scope="col">Veg Dish</th>
+      <th scope="col">Veg Price</th>
+      <th scope="col">Non Veg Dish</th>
+      <th scope="col">Non Veg Price</th>
+      
+      
+    </tr>
+  </thead>
+  <tbody id="menuTbl">
+    
+    
+  </tbody>
+</table>
+   
+      
+ 
+
+<script>
+const url="http://localhost:8080/FoodOrderingApp-web/listMenuServlet";
+fetch(url).then(res=> res.json()).then(res=> {
+       // console.log(res);
+        let menu=res;
+        let content="";
+        for(let menus of menu){
+	
+        	content=content+`<tr><th scope="row">${menus.id}</th><td>${menus.vegDishes}</td><td>${menus.vegDishesPrice}</td><td>${menus.nonVegDishes}</td><td>${menus.nonVegDishesPrice}</td></tr>`;
+        }
+        document.querySelector("#menuTbl").innerHTML=content;
+        });
+</script>
+</body>
+</html>
